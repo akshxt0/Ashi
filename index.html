@@ -12,279 +12,222 @@
 }
 
 body{
-  overflow-x:hidden;
   background:linear-gradient(#9fd8ff,#6db9ff,#3a98ff);
   color:white;
+  overflow-x:hidden;
 }
 
-/* ========= SECTIONS ========= */
+/* ============ SECTIONS ============ */
 section{
   min-height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
-  text-align:center;
   padding:25px;
+  text-align:center;
   position:relative;
 }
 
-/* ========= FLOATING STICKERS ========= */
+/* divider */
+section::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  width:80%;
+  height:2px;
+  background:rgba(255,255,255,.2);
+}
+
+/* ============ STICKERS BG ============ */
 .sticker{
   position:fixed;
   width:110px;
-  z-index:-1;
-  opacity:.95;
+  opacity:.9;
+  animation:float 6s ease-in-out infinite;
   pointer-events:none;
-  animation:float 6s ease-in-out infinite alternate;
 }
 
 @keyframes float{
-  from{transform:translateY(0)}
-  to{transform:translateY(-20px)}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
 }
 
-/* ========= TEXT ========= */
-h1{
-  font-size:7vw;
-  text-shadow:0 6px 20px rgba(0,0,0,.3);
-}
-
-/* ========= MAIN VIDEO ========= */
+/* ============ MAIN VIDEO ============ */
 .mainVideo{
-  width:92vw;
-  max-width:420px;
+  width:95%;
   border-radius:22px;
 }
 
 .audioBtn{
-  position:absolute;
-  top:12px;
-  right:12px;
+  margin-top:10px;
   background:white;
+  color:black;
+  padding:8px 14px;
+  border-radius:20px;
   border:none;
-  border-radius:50%;
-  padding:10px 14px;
 }
 
-/* ========= REELS PERFECT ========= */
-.reels{
-  height:100vh;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-}
-
+/* ============ REELS ============ */
 .reel{
   height:100vh;
-  width:100vw;
-  scroll-snap-align:start;
+  width:100%;
   position:relative;
-  background:black;
 }
 
 .reel video{
-  height:100%;
   width:100%;
+  height:100%;
   object-fit:cover;
 }
 
-/* ========= DP (ONLY REELS) ========= */
+/* like button */
+.likeBtn{
+  position:absolute;
+  right:18px;
+  bottom:110px;
+  font-size:32px;
+  background:none;
+  border:none;
+  color:white;
+}
+
+/* your dp floating */
 .dp{
-  position:fixed;
-  left:16px;
-  bottom:95px;
-  width:60px;
-  height:60px;
+  position:absolute;
+  left:18px;
+  bottom:110px;
+  width:55px;
+  height:55px;
   border-radius:50%;
   border:3px solid white;
-  z-index:50;
-  display:none;
-  animation:floatdp 3s ease-in-out infinite;
+  animation:float 5s infinite;
 }
 
-@keyframes floatdp{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-}
-
-/* ========= LIKE ========= */
-.likeBtn{
-  position:fixed;
-  right:18px;
-  bottom:120px;
-  font-size:34px;
-  display:none;
-  z-index:50;
-}
-
-/* hearts */
-.bigHeart{
-  position:fixed;
-  font-size:70px;
-  animation:pop .6s forwards;
-}
-@keyframes pop{
-  0%{transform:scale(0)}
-  100%{opacity:0}
-}
-
+/* kisses */
 .kiss{
-  position:fixed;
-  font-size:22px;
-  animation:rise 1.4s forwards;
-}
-@keyframes rise{
-  to{transform:translateY(-140px);opacity:0}
+  position:absolute;
+  font-size:24px;
+  animation:kissUp 1s forwards;
 }
 
-/* ========= BUTTONS ========= */
+@keyframes kissUp{
+  to{
+    transform:translateY(-120px);
+    opacity:0;
+  }
+}
+
+/* ============ BUTTONS ============ */
 .yes{
-  background:#ff4f87;
+  background:#ff4f8b;
+  padding:14px 30px;
   border:none;
-  padding:16px 38px;
-  border-radius:40px;
+  border-radius:30px;
   color:white;
   font-size:18px;
 }
 
-/* STABLE NO BUTTON */
 .no{
-  position:fixed;
-  bottom:60px;
-  right:20px;
-  width:130px;
-  height:48px;
-  border-radius:28px;
+  background:#ff7c9c;
+  padding:14px 25px;
   border:none;
-  background:#ff8aa8;
+  border-radius:30px;
   color:white;
-  z-index:100;
+  position:absolute;
 }
 </style>
 </head>
-
 <body>
 
-<!-- STICKERS -->
-<img src="ticket1.png" class="sticker" style="top:8%;left:6%">
-<img src="ticket2.png" class="sticker" style="top:40%;right:6%">
-<img src="ticket3.png" class="sticker" style="bottom:30%;left:8%">
-<img src="ticket4.png" class="sticker" style="bottom:18%;right:10%">
-<img src="ticket5.png" class="sticker" style="top:60%;left:40%">
-<img src="unocard.png" class="sticker" style="top:48%;right:35%;width:140px">
+<!-- floating stickers -->
+<img src="ticket1.png" class="sticker" style="top:10%;left:10%">
+<img src="ticket2.png" class="sticker" style="top:20%;right:10%">
+<img src="ticket3.png" class="sticker" style="bottom:15%;left:5%">
+<img src="ticket4.png" class="sticker" style="bottom:25%;right:8%">
+<img src="ticket5.png" class="sticker" style="top:45%;left:35%">
+<img src="unocard.png" class="sticker" style="top:60%;right:35%">
 
-<!-- DP + LIKE -->
-<img src="IMG_20260106_133607_522.webp" id="dp" class="dp">
-<div id="likeBtn" class="likeBtn">❤️</div>
-
-<!-- HERO -->
+<!-- ============ MAIN VIDEO ============ -->
 <section>
-<h1>Hey Ashi ☁️</h1>
+  <h2>to the girl i want to fall in love with in every lifetime ❤️</h2>
+
+  <video id="mainVid" class="mainVideo" src="main.mp4"></video>
+  <button class="audioBtn" onclick="toggleAudio()">Audio 🔊</button>
 </section>
 
-<!-- MAIN -->
+<!-- ============ REELS ============ -->
+<section class="reel">
+  <video src="reel1.mp4" onclick="togglePlay(this)"></video>
+  <button class="likeBtn" onclick="like(this)">❤️</button>
+  <img src="IMG_20260106_133607_522.webp" class="dp">
+</section>
+
+<section class="reel">
+  <video src="reel2.mp4" onclick="togglePlay(this)"></video>
+  <button class="likeBtn" onclick="like(this)">❤️</button>
+  <img src="IMG_20260106_133607_522.webp" class="dp">
+</section>
+
+<section class="reel">
+  <video src="reel3.mp4" onclick="togglePlay(this)"></video>
+  <button class="likeBtn" onclick="like(this)">❤️</button>
+  <img src="IMG_20260106_133607_522.webp" class="dp">
+</section>
+
+<!-- add more same way -->
+
+<!-- ============ PROPOSAL ============ -->
 <section>
-<button class="audioBtn" onclick="toggleAudio()">🔊</button>
-<video id="mainVid" class="mainVideo" src="main.mp4" autoplay muted loop playsinline></video>
-
-<h1 style="margin-top:25px;font-size:6vw">
-the girl i'd fall in love with<br>in every lifetime
-</h1>
+  <h2>Will you be my Valentine?</h2>
+  <button class="yes" onclick="confetti()">Yes ✨</button>
+  <button class="no" id="noBtn">No</button>
 </section>
-
-<!-- REELS -->
-<section id="reels" class="reels">
-
-<div class="reel"><video src="reel1.mp4" playsinline></video></div>
-<div class="reel"><video src="reel2.mp4" playsinline></video></div>
-<div class="reel"><video src="reel3.mp4" playsinline></video></div>
-<div class="reel"><video src="reel4.mp4" playsinline></video></div>
-<div class="reel"><video src="reel5.mp4" playsinline></video></div>
-<div class="reel"><video src="reel6.mp4" playsinline></video></div>
-<div class="reel"><video src="reel7.mp4" playsinline></video></div>
-<div class="reel"><video src="reel8.mp4" playsinline></video></div>
-
-</section>
-
-<!-- VALENTINE -->
-<section>
-<h1>Will you be my Valentine?</h1>
-<button class="yes">Yes 💖</button>
-</section>
-
-<button id="noBtn" class="no">No</button>
 
 <script>
-
-/* AUDIO */
 function toggleAudio(){
- const v=document.getElementById("mainVid");
- v.muted=!v.muted;
+  let v=document.getElementById("mainVid");
+  v.muted=!v.muted;
 }
 
-/* REELS AUTOPLAY */
-const vids=document.querySelectorAll(".reel video");
+function togglePlay(v){
+  v.paused ? v.play() : v.pause();
+}
 
-const obs=new IntersectionObserver(entries=>{
- entries.forEach(e=>{
-   if(e.isIntersecting){
-     e.target.play();
-     e.target.muted=false;
-   } else e.target.pause();
- });
-},{threshold:.7});
+function like(btn){
+  let parent=btn.parentElement;
 
-vids.forEach(v=>obs.observe(v));
+  for(let i=0;i<6;i++){
+    let k=document.createElement("div");
+    k.innerText="💋";
+    k.className="kiss";
+    k.style.left=Math.random()*80+"%";
+    k.style.bottom="80px";
+    parent.appendChild(k);
+    setTimeout(()=>k.remove(),1000);
+  }
+}
 
-/* SHOW DP + LIKE ONLY WHEN INSIDE REELS */
-const dp=document.getElementById("dp");
-const like=document.getElementById("likeBtn");
-const reels=document.getElementById("reels");
+function confetti(){
+  for(let i=0;i<50;i++){
+    let c=document.createElement("div");
+    c.style.position="fixed";
+    c.style.width="6px";
+    c.style.height="6px";
+    c.style.background="white";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="-10px";
+    c.style.animation="kissUp 2s forwards";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2000);
+  }
+}
 
-window.addEventListener("scroll",()=>{
- const r=reels.getBoundingClientRect();
- const inside=r.top<window.innerHeight && r.bottom>0;
- dp.style.display=inside?"block":"none";
- like.style.display=inside?"block":"none";
-});
-
-/* LIKE */
-like.onclick=e=>{
- const x=e.clientX,y=e.clientY;
-
- const heart=document.createElement("div");
- heart.className="bigHeart";
- heart.innerHTML="❤️";
- heart.style.left=x+"px";
- heart.style.top=y+"px";
- document.body.appendChild(heart);
-
- for(let i=0;i<5;i++){
-  const k=document.createElement("div");
-  k.className="kiss";
-  k.innerHTML="💋";
-  k.style.left=x+Math.random()*40+"px";
-  k.style.top=y+"px";
-  document.body.appendChild(k);
- }
-};
-
-/* NO BUTTON RUN */
-const noBtn=document.getElementById("noBtn");
-let tries=0;
-
-noBtn.onclick=()=>{
- if(tries<3){
-   const w=window.innerWidth-140;
-   const h=window.innerHeight-100;
-   noBtn.style.left=Math.random()*w+"px";
-   noBtn.style.top=Math.random()*h+"px";
-   noBtn.style.right="auto";
-   noBtn.style.bottom="auto";
- }else{
-   noBtn.textContent="chal hat bachi sudhar ja ❤️";
- }
- tries++;
+/* no button run */
+let no=document.getElementById("noBtn");
+no.onmouseover=()=>{
+  no.style.left=Math.random()*80+"%";
+  no.style.top=Math.random()*80+"%";
 };
 </script>
 
