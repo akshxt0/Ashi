@@ -56,20 +56,8 @@ section{
 .card{
   background:rgba(255,255,255,0.18);
   backdrop-filter:blur(20px);
-  padding:26px;
-  border-radius:22px;
-}
-
-/* ========= TEXT ========= */
-
-h1{
-  font-size:8vw;
-  text-shadow:0 5px 25px rgba(0,0,0,.35);
-}
-
-p{
-  font-size:4vw;
-  margin-top:10px;
+  padding:24px;
+  border-radius:20px;
 }
 
 /* ========= FLOATING PROFILE ========= */
@@ -94,7 +82,7 @@ p{
   z-index:1000;
 }
 
-/* ========= CANVA FIXED RATIO ========= */
+/* ========= CANVA ========= */
 
 .canvaWrap{
   width:92vw;
@@ -105,38 +93,31 @@ p{
   overflow:hidden;
 }
 
-.canvaWrap iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
 /* ========= REELS ========= */
 
 .reels{
   height:100vh;
-  overflow-y:scroll;
+  overflow-y:auto;
   scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
 }
 
 .reel{
   height:100vh;
   scroll-snap-align:start;
+  scroll-snap-stop:always;
+  position:relative;
   display:flex;
   justify-content:center;
   align-items:center;
-  position:relative;
 }
 
-/* FULL SCREEN LIKE INSTAGRAM */
 .reel video{
   height:100vh;
   width:100vw;
   object-fit:cover;
 }
 
-/* LIKE BUTTON */
+/* like button */
 .likeBtn{
   position:absolute;
   right:18px;
@@ -147,7 +128,19 @@ p{
   padding:10px 14px;
 }
 
-/* ========= HEART / KISS ========= */
+/* sound button */
+.soundBtn{
+  position:absolute;
+  right:18px;
+  bottom:150px;
+  font-size:20px;
+  background:rgba(0,0,0,.5);
+  color:white;
+  border-radius:50%;
+  padding:10px 12px;
+}
+
+/* ========= HEART/KISS ========= */
 
 .bigHeart{
   position:fixed;
@@ -184,69 +177,44 @@ p{
   to{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* ========= BUTTONS ========= */
-
 button{
   padding:12px 22px;
   border:none;
   border-radius:30px;
-  font-size:16px;
   cursor:pointer;
 }
 
 .yes{ background:white; color:#3a98ff; }
 .no{ background:#ff8fa3; color:white; position:absolute; }
 
-/* ========= IFRAME ========= */
-
-iframe{
-  border-radius:18px;
-  width:90vw;
-  max-width:500px;
-  margin-top:18px;
-}
-
 </style>
 </head>
 
-
-
 <body>
 
-<!-- profile -->
 <img src="IMG_20260106_133607_522.webp" class="pfp">
 <div class="pfpHeart">❤️</div>
 
-<!-- clouds -->
 <div class="cloud" style="top:10%"></div>
 <div class="cloud" style="top:40%"></div>
 <div class="cloud" style="top:70%"></div>
 
 
 
-<!-- HERO + MUSIC -->
+<!-- HERO -->
 <section>
   <div class="card">
     <h1>Hey Ashi ☁️</h1>
     <p>scroll down</p>
-
-    <iframe height="120" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1594326735&hide_related=true&show_comments=false&show_user=false">
-    </iframe>
   </div>
 </section>
 
 
 
-<!-- CANVA COLLAGE (FIXED SIZE) -->
+<!-- CANVA -->
 <section>
-  <div class="card">
-    <div class="canvaWrap">
-      <iframe
-        src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"
-        allowfullscreen>
-      </iframe>
-    </div>
+  <div class="card canvaWrap">
+    <iframe src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"></iframe>
   </div>
 </section>
 
@@ -259,8 +227,7 @@ iframe{
 
   <div class="reel">
     <div class="card">
-      <h1 style="font-size:6vw">For You</h1>
-      <p>Double tap to like</p>
+      <p>Double tap to like • tap 🔊 for sound</p>
     </div>
   </div>
 
@@ -268,7 +235,8 @@ iframe{
   for(let i=1;i<=8;i++){
     document.write(`
       <div class="reel" ondblclick="likeEffect(event)">
-        <video src="reel${i}.mp4" autoplay muted loop playsinline onclick="toggleSound(this)"></video>
+        <video id="v${i}" src="reel${i}.mp4" autoplay muted loop playsinline></video>
+        <button class="soundBtn" onclick="toggleSound(v${i}, this)">🔇</button>
         <button class="likeBtn" onclick="likeEffect(event)">❤️</button>
       </div>
     `);
@@ -285,11 +253,8 @@ iframe{
 <section>
   <div class="card">
     <h1>Will you be my Valentine?</h1>
-
-    <div style="position:relative;margin-top:20px;height:80px;">
-      <button class="yes" onclick="boom()">Yes 💙</button>
-      <button class="no" id="noBtn">No</button>
-    </div>
+    <button class="yes" onclick="boom()">Yes 💙</button>
+    <button class="no" id="noBtn">No</button>
   </div>
 </section>
 
@@ -297,51 +262,40 @@ iframe{
 
 <script>
 
-/* sound toggle */
-function toggleSound(v){
+/* sound toggle with icon */
+function toggleSound(v, btn){
   v.muted = !v.muted;
+  btn.innerHTML = v.muted ? "🔇" : "🔊";
 }
 
 /* like */
 function likeEffect(e){
-  let heart=document.createElement("div");
-  heart.className="bigHeart";
-  heart.innerHTML="❤️";
-  heart.style.left=(e.clientX-35)+"px";
-  heart.style.top=(e.clientY-35)+"px";
-  document.body.appendChild(heart);
-
-  for(let i=0;i<8;i++){
-    let k=document.createElement("div");
-    k.className="kiss";
-    k.innerHTML="💋";
-    k.style.left=Math.random()*100+"vw";
-    k.style.bottom="120px";
-    document.body.appendChild(k);
-  }
+  let h=document.createElement("div");
+  h.className="bigHeart";
+  h.innerHTML="❤️";
+  h.style.left=(e.clientX-35)+"px";
+  h.style.top=(e.clientY-35)+"px";
+  document.body.appendChild(h);
 }
 
 /* confetti */
 function boom(){
-  for(let i=0;i<180;i++){
+  for(let i=0;i<150;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
     c.style.top="-10px";
-    c.style.background=["#fff","#ff8fa3","#b3e0ff"][Math.floor(Math.random()*3)];
     document.body.appendChild(c);
   }
 }
 
-/* run away + taunt AFTER press */
+/* run away */
 const noBtn=document.getElementById("noBtn");
-
 function moveBtn(){
-  noBtn.style.top=(Math.random()*120-60)+"px";
-  noBtn.style.left=(Math.random()*150-75)+"px";
+  noBtn.style.position="relative";
+  noBtn.style.left=(Math.random()*200-100)+"px";
   alert("chal hat bachi sudhar ja 😝");
 }
-
 noBtn.addEventListener("touchstart",moveBtn);
 noBtn.addEventListener("mouseover",moveBtn);
 
