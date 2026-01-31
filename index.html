@@ -6,7 +6,7 @@
 
 <style>
 
-/* ================= BASE ================= */
+/* ========= BASE ========= */
 
 *{
   margin:0;
@@ -21,7 +21,7 @@ body{
   background:linear-gradient(#9fd8ff,#6db9ff,#3a98ff);
 }
 
-/* ================= CLOUDS ================= */
+/* ========= CLOUDS ========= */
 
 .cloud{
   position:fixed;
@@ -40,7 +40,7 @@ body{
   to{transform:translateX(140vw)}
 }
 
-/* ================= SECTIONS ================= */
+/* ========= SECTIONS ========= */
 
 section{
   min-height:100vh;
@@ -51,16 +51,16 @@ section{
   text-align:center;
 }
 
-/* ================= CARDS ================= */
+/* ========= CARD ========= */
 
 .card{
   background:rgba(255,255,255,.18);
   backdrop-filter:blur(20px);
-  padding:22px;
+  padding:24px;
   border-radius:20px;
 }
 
-/* ================= MAIN VIDEO ================= */
+/* ========= HERO VIDEO ========= */
 
 .heroVideo{
   width:92vw;
@@ -70,7 +70,7 @@ section{
   object-fit:cover;
 }
 
-/* ================= CANVA ================= */
+/* ========= CANVA ========= */
 
 .canvaWrap{
   width:92vw;
@@ -80,7 +80,7 @@ section{
   overflow:hidden;
 }
 
-/* ================= REELS ================= */
+/* ========= REELS ========= */
 
 .reelsSection{
   position:relative;
@@ -109,39 +109,39 @@ section{
   object-fit:cover;
 }
 
-/* ================= FLOATING DP (REELS ONLY) ================= */
+/* LIKE BUTTON */
+
+.likeBtn{
+  position:absolute;
+  right:18px;
+  bottom:100px;
+  font-size:26px;
+  background:white;
+  border-radius:50%;
+  padding:10px 14px;
+  animation:floatBtn 2s ease-in-out infinite alternate;
+}
+
+/* FLOATING PFP */
 
 .reelPfp{
-  position:fixed;
-  top:18px;
-  left:18px;
-  width:55px;
-  height:55px;
+  position:absolute;
+  right:18px;
+  top:20px;
+  width:50px;
+  height:50px;
   border-radius:50%;
   object-fit:cover;
   border:3px solid white;
-  z-index:1000;
-  display:none;
-  animation:pfpFloat 3s ease-in-out infinite alternate;
+  animation:floatBtn 2s ease-in-out infinite alternate;
 }
 
-/* gentle floating animation */
-@keyframes pfpFloat{
+@keyframes floatBtn{
   from{transform:translateY(0)}
-  to{transform:translateY(-8px)}
+  to{transform:translateY(-7px)}
 }
 
-.reelHeart{
-  position:fixed;
-  top:12px;
-  left:55px;
-  font-size:18px;
-  z-index:1001;
-  display:none;
-  animation:pfpFloat 3s ease-in-out infinite alternate;
-}
-
-/* ================= HEART POP ================= */
+/* HEART */
 
 .bigHeart{
   position:fixed;
@@ -155,16 +155,40 @@ section{
   100%{opacity:0}
 }
 
-/* ================= BUTTONS ================= */
+/* CONFETTI */
+
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* BUTTONS */
 
 button{
   padding:12px 22px;
   border:none;
   border-radius:30px;
+  cursor:pointer;
 }
 
 .yes{ background:white; color:#3a98ff; }
-.no{ background:#ff8fa3; color:white; position:relative; }
+
+/* 🔥 FIX: runs anywhere on screen */
+.no{
+  background:#ff8fa3;
+  color:white;
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9999;
+}
 
 </style>
 </head>
@@ -188,9 +212,18 @@ button{
 
 
 
-<!-- MAIN VIDEO (main.mp4 back) -->
+<!-- MAIN VIDEO -->
 <section>
   <video class="heroVideo" src="main.mp4" autoplay muted loop playsinline></video>
+</section>
+
+
+
+<!-- TEXT (kept as you asked) -->
+<section>
+  <div class="card">
+    <h2>the girl i want to fall in love with in every lifetime 🤍</h2>
+  </div>
 </section>
 
 
@@ -207,27 +240,18 @@ button{
 
 
 
-<!-- ================= REELS ================= -->
-
+<!-- REELS -->
 <section class="reelsSection">
 
-<!-- floating dp only here -->
-<img src="IMG_20260106_133607_522.webp" class="reelPfp" id="pfp">
-<div class="reelHeart" id="pfpHeart">❤️</div>
-
-<div class="reels" id="reels">
-
-  <div class="reel">
-    <div class="card">
-      <p>just scroll ❤️</p>
-    </div>
-  </div>
+<div class="reels">
 
   <script>
   for(let i=1;i<=8;i++){
     document.write(`
-      <div class="reel">
-        <video src="reel${i}.mp4" playsinline loop></video>
+      <div class="reel" ondblclick="likeEffect(event)">
+        <img src="IMG_20260106_133607_522.webp" class="reelPfp">
+        <video src="reel${i}.mp4" loop playsinline></video>
+        <button class="likeBtn" onclick="likeEffect(event)">❤️</button>
       </div>
     `);
   }
@@ -243,68 +267,64 @@ button{
 <section>
   <div class="card">
     <h2>Will you be my Valentine?</h2>
-    <button class="yes">Yes 💙</button>
-    <button class="no" id="noBtn">No</button>
+    <button class="yes" onclick="boom()">Yes 💙</button>
   </div>
 </section>
+
+<!-- moved outside card so it can escape whole page -->
+<button class="no" id="noBtn">No</button>
 
 
 
 <script>
 
-/* ================= REAL REELS BEHAVIOUR ================= */
+/* reels auto play */
+const vids=document.querySelectorAll(".reel video");
 
-const videos=document.querySelectorAll(".reel video");
-
-/* auto play only visible reel */
-const observer=new IntersectionObserver((entries)=>{
+const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
-    const v=entry.target;
-
     if(entry.isIntersecting){
-      videos.forEach(x=>{
-        x.pause();
-        x.muted=true;
+      vids.forEach(v=>{
+        v.pause();
+        v.muted=true;
       });
-
-      v.muted=false;
-      v.play();
+      entry.target.play();
+      entry.target.muted=false;
     }
   });
 },{threshold:.7});
 
-videos.forEach(v=>observer.observe(v));
+vids.forEach(v=>observer.observe(v));
 
+/* like */
+function likeEffect(e){
+  let h=document.createElement("div");
+  h.className="bigHeart";
+  h.innerHTML="❤️";
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  document.body.appendChild(h);
+}
 
+/* confetti */
+function boom(){
+  for(let i=0;i<150;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    document.body.appendChild(c);
+  }
+}
 
-/* ================= SHOW DP ONLY ON REELS ================= */
-
-const reels=document.getElementById("reels");
-const pfp=document.getElementById("pfp");
-const heart=document.getElementById("pfpHeart");
-
-const reelObserver=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      pfp.style.display="block";
-      heart.style.display="block";
-    }else{
-      pfp.style.display="none";
-      heart.style.display="none";
-    }
-  });
-},{threshold:.2});
-
-reelObserver.observe(reels);
-
-
-
-/* ================= NO BUTTON ================= */
-
+/* 🔥 FULL SCREEN RUN AWAY */
 const noBtn=document.getElementById("noBtn");
 
 function moveBtn(){
-  noBtn.style.left=(Math.random()*200-100)+"px";
+  const x=Math.random()*(window.innerWidth-120);
+  const y=Math.random()*(window.innerHeight-60);
+
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
   noBtn.innerText="chal hat bachi sudhar ja 😝";
 }
 
