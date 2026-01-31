@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>For Ashi ☁️</title>
 
 <style>
@@ -11,35 +10,53 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:system-ui;
+  font-family:-apple-system,system-ui,sans-serif;
 }
 
 body{
   overflow-x:hidden;
   color:white;
-  background:linear-gradient(#bfe6ff,#8ed0ff,#5bb7ff);
+  background:linear-gradient(180deg,#eaf8ff,#bfe6ff,#79c5ff);
 }
 
-/* ===== CLOUDS ===== */
+/* ================= CLOUDS ================= */
+
 .cloud{
-  position:fixed;
-  width:350px;
-  height:180px;
+  position:absolute;
+  width:450px;
+  height:220px;
   background:white;
   border-radius:50%;
-  filter:blur(55px);
+  filter:blur(70px);
   opacity:.35;
-  animation:float 45s linear infinite;
-  z-index:-1;
+  animation:float 80s linear infinite;
   pointer-events:none;
 }
 
 @keyframes float{
-  from{transform:translateX(-30vw)}
-  to{transform:translateX(130vw)}
+  from{transform:translateX(-40vw)}
+  to{transform:translateX(140vw)}
 }
 
-/* ===== SECTIONS ===== */
+/* ================= SPARKLES ================= */
+
+.sparkle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes twinkle{
+  from{opacity:.3}
+  to{opacity:1}
+}
+
+/* ================= SECTIONS ================= */
+
 section{
   min-height:100vh;
   display:flex;
@@ -48,57 +65,116 @@ section{
   align-items:center;
   text-align:center;
   padding:8vw;
+
+  opacity:0;
+  transform:translateY(40px);
+  transition:1.2s ease;
 }
 
-h1{font-size:8vw}
-p{font-size:4vw;margin-top:10px}
-
-/* ===== IMAGES ===== */
-.heroimg{
-  width:80vw;
-  max-width:420px;
-  border-radius:25px;
-  margin-top:20px;
+.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.collage{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
-  gap:10px;
+h1{
+  font-size:8vw;
+  text-shadow:0 0 25px rgba(255,255,255,.8);
+}
+
+p{
+  font-size:4vw;
+  margin-top:10px;
+}
+
+/* ================= MUSIC PLAYER ================= */
+
+.musicWrap{
   width:90vw;
-  max-width:500px;
+  max-width:420px;
   margin-top:20px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
 }
 
-.collage img{
+.musicWrap iframe{
   width:100%;
   height:100px;
-  object-fit:cover;
-  border-radius:14px;
+  border:none;
 }
 
-/* ===== BUTTON ===== */
+/* ================= MAIN VIDEO ================= */
+
+.herovid{
+  width:85vw;
+  max-width:450px;
+  border-radius:26px;
+  margin-top:25px;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+
+/* ================= CANVA VIDEO ================= */
+
+.canvaWrap{
+  width:92vw;
+  max-width:480px;
+  aspect-ratio:9/16;
+  margin-top:25px;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+
+.canvaWrap iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* ================= LOVE LETTER ================= */
+
+.letter{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+  border-radius:25px;
+  padding:25px;
+  width:90vw;
+  max-width:500px;
+  line-height:1.6;
+  font-size:18px;
+}
+
+/* ================= BUTTON ================= */
+
 button{
   padding:14px 28px;
   border:none;
   border-radius:30px;
   font-size:18px;
+  font-weight:600;
   background:white;
   color:#4aa3ff;
-  margin-top:20px;
+  margin-top:25px;
+  transition:.15s;
 }
 
-/* ===== CONFETTI ===== */
-.confetti{
+button:active{
+  transform:scale(.95);
+}
+
+/* ================= HEARTS ================= */
+
+.heart{
   position:fixed;
-  width:8px;
-  height:8px;
-  z-index:9999; /* VERY IMPORTANT */
-  animation:fall 3s linear infinite;
+  font-size:18px;
+  animation:rise 2s linear forwards;
 }
 
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg)}
+@keyframes rise{
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
 }
 
 </style>
@@ -108,62 +184,100 @@ button{
 
 <!-- clouds -->
 <div class="cloud" style="top:10%"></div>
-<div class="cloud" style="top:40%"></div>
-<div class="cloud" style="top:70%"></div>
+<div class="cloud" style="top:45%"></div>
+<div class="cloud" style="top:75%"></div>
 
-<!-- music (manual play for mobile) -->
-<audio id="music">
-  <source src="song.mp3">
-</audio>
 
+<!-- HERO + SOUND -->
 <section>
   <h1>Hey Ashi ☁️</h1>
-  <p>I made a little sky for you…</p>
-  <button onclick="playMusic()">Play music 🎵</button>
-</section>
+  <p>play this while scrolling 💙</p>
 
-<section>
-  <h1 style="font-size:6vw">
-    the girl i'd fall in love with<br>in every lifetime ✨
-  </h1>
-  <img src="main.jpg" class="heroimg">
-</section>
-
-<section>
-  <h1 style="font-size:6vw">little pieces of you 🤍</h1>
-  <div class="collage">
-    <img src="1.jpg">
-    <img src="2.jpg">
-    <img src="3.jpg">
-    <img src="4.jpg">
-    <img src="5.jpg">
-    <img src="6.jpg">
+  <div class="musicWrap">
+    <iframe
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1594326735&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
+      allow="autoplay">
+    </iframe>
   </div>
 </section>
 
+
+<!-- OPTIONAL MAIN VIDEO -->
+<section>
+  <h1 style="font-size:6vw">
+    the girl i'd fall in love with<br>
+    in every lifetime ✨
+  </h1>
+
+  <video class="herovid" autoplay muted loop playsinline>
+    <source src="main.mp4">
+  </video>
+</section>
+
+
+<!-- CANVA COLLAGE VIDEO -->
+<section>
+  <h1 style="font-size:6vw">little pieces of you 🤍</h1>
+
+  <div class="canvaWrap">
+    <iframe
+      src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"
+      allowfullscreen loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+
+<!-- LOVE LETTER -->
+<section>
+  <div class="letter">
+    I don’t just like you.<br><br>
+    I choose you.<br>
+    In every life, every city, every timeline…<br>
+    I’d still find you and fall for you again. ☁️
+  </div>
+</section>
+
+
+<!-- PROPOSAL -->
 <section>
   <h1>Will you be my Valentine?</h1>
-  <button onclick="boom()">Yes 💙</button>
+  <button onclick="hearts()">Yes 💙</button>
 </section>
 
 
 <script>
 
-/* music */
-function playMusic(){
-  document.getElementById("music").play();
+/* sparkles */
+for(let i=0;i<40;i++){
+  let s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  document.body.appendChild(s);
 }
 
-/* confetti */
-function boom(){
-  for(let i=0;i<200;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=["#fff","#d6f0ff","#b3e0ff"][Math.floor(Math.random()*3)];
-    document.body.appendChild(c);
+/* fade on scroll */
+const sections=document.querySelectorAll("section");
+
+window.addEventListener("scroll",()=>{
+  sections.forEach(sec=>{
+    if(sec.getBoundingClientRect().top < window.innerHeight-80){
+      sec.classList.add("show");
+    }
+  });
+});
+
+/* heart burst */
+function hearts(){
+  for(let i=0;i<80;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💙";
+    h.style.left=Math.random()*100+"vw";
+    h.style.bottom="0px";
+    document.body.appendChild(h);
   }
-  alert("Yayyy 💙");
 }
 
 </script>
