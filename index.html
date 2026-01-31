@@ -6,7 +6,7 @@
 
 <style>
 
-/* ================= GLOBAL ================= */
+/* ========= BASE ========= */
 
 *{
   margin:0;
@@ -21,7 +21,7 @@ body{
   background:linear-gradient(#9fd8ff,#6db9ff,#3a98ff);
 }
 
-/* ================= CLOUDS ================= */
+/* ========= CLOUDS ========= */
 
 .cloud{
   position:fixed;
@@ -40,24 +40,7 @@ body{
   to{transform:translateX(140vw)}
 }
 
-/* ================= SPARKLES ================= */
-
-.sparkle{
-  position:fixed;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  animation:blink 2s infinite alternate;
-  z-index:-1;
-}
-
-@keyframes blink{
-  from{opacity:.3}
-  to{opacity:1}
-}
-
-/* ================= SECTIONS ================= */
+/* ========= SECTIONS ========= */
 
 section{
   min-height:100vh;
@@ -68,17 +51,16 @@ section{
   text-align:center;
 }
 
-/* ================= GLASS CARD ================= */
+/* ========= CARD ========= */
 
 .card{
   background:rgba(255,255,255,0.18);
   backdrop-filter:blur(20px);
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 8px 40px rgba(0,0,0,.25);
+  padding:26px;
+  border-radius:22px;
 }
 
-/* ================= TEXT ================= */
+/* ========= TEXT ========= */
 
 h1{
   font-size:8vw;
@@ -90,20 +72,46 @@ p{
   margin-top:10px;
 }
 
-/* ================= BUTTONS ================= */
+/* ========= FLOATING PROFILE ========= */
 
-button{
-  padding:12px 22px;
-  border:none;
-  border-radius:30px;
-  font-size:16px;
-  cursor:pointer;
+.pfp{
+  position:fixed;
+  top:18px;
+  left:18px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid white;
+  z-index:999;
 }
 
-.yes{ background:white; color:#3a98ff; }
-.no{ background:#ff8fa3; color:white; position:absolute; }
+.pfpHeart{
+  position:fixed;
+  top:12px;
+  left:55px;
+  font-size:18px;
+  z-index:1000;
+}
 
-/* ================= REELS ================= */
+/* ========= CANVA FIXED RATIO ========= */
+
+.canvaWrap{
+  width:92vw;
+  max-width:420px;
+  aspect-ratio:9/16;
+  margin:auto;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.canvaWrap iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* ========= REELS ========= */
 
 .reels{
   height:100vh;
@@ -121,28 +129,30 @@ button{
   position:relative;
 }
 
+/* FULL SCREEN LIKE INSTAGRAM */
 .reel video{
-  height:85vh;
-  border-radius:25px;
+  height:100vh;
+  width:100vw;
+  object-fit:cover;
 }
 
+/* LIKE BUTTON */
 .likeBtn{
   position:absolute;
-  right:20px;
+  right:18px;
   bottom:90px;
-  font-size:28px;
+  font-size:26px;
   background:white;
   border-radius:50%;
   padding:10px 14px;
 }
 
-/* ================= HEART + KISS ================= */
+/* ========= HEART / KISS ========= */
 
 .bigHeart{
   position:fixed;
   font-size:70px;
-  animation:pop 0.8s ease forwards;
-  pointer-events:none;
+  animation:pop .8s ease forwards;
 }
 
 @keyframes pop{
@@ -153,15 +163,15 @@ button{
 
 .kiss{
   position:fixed;
-  font-size:24px;
-  animation:rise 2s linear forwards;
+  font-size:22px;
+  animation:rise 1.8s linear forwards;
 }
 
 @keyframes rise{
   to{transform:translateY(-150px);opacity:0}
 }
 
-/* ================= CONFETTI ================= */
+/* ========= CONFETTI ========= */
 
 .confetti{
   position:fixed;
@@ -174,13 +184,26 @@ button{
   to{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* ================= IFRAME ================= */
+/* ========= BUTTONS ========= */
+
+button{
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.yes{ background:white; color:#3a98ff; }
+.no{ background:#ff8fa3; color:white; position:absolute; }
+
+/* ========= IFRAME ========= */
 
 iframe{
-  border-radius:20px;
-  margin-top:20px;
+  border-radius:18px;
   width:90vw;
   max-width:500px;
+  margin-top:18px;
 }
 
 </style>
@@ -190,74 +213,62 @@ iframe{
 
 <body>
 
+<!-- profile -->
+<img src="IMG_20260106_133607_522.webp" class="pfp">
+<div class="pfpHeart">❤️</div>
+
 <!-- clouds -->
 <div class="cloud" style="top:10%"></div>
-<div class="cloud" style="top:45%"></div>
-<div class="cloud" style="top:75%"></div>
-
-<script>
-/* sparkles */
-for(let i=0;i<60;i++){
-  let s=document.createElement("div");
-  s.className="sparkle";
-  s.style.left=Math.random()*100+"vw";
-  s.style.top=Math.random()*100+"vh";
-  document.body.appendChild(s);
-}
-</script>
+<div class="cloud" style="top:40%"></div>
+<div class="cloud" style="top:70%"></div>
 
 
 
-<!-- ================= HERO + MUSIC ================= -->
-
+<!-- HERO + MUSIC -->
 <section>
   <div class="card">
     <h1>Hey Ashi ☁️</h1>
-    <p>play this while scrolling 💙</p>
+    <p>scroll down</p>
 
-    <!-- SoundCloud -->
-    <iframe height="120" scrolling="no" frameborder="no" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1594326735&hide_related=true&show_comments=false&show_user=false&show_reposts=false">
+    <iframe height="120" allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1594326735&hide_related=true&show_comments=false&show_user=false">
     </iframe>
   </div>
 </section>
 
 
 
-<!-- ================= CANVA COLLAGE ================= -->
-
+<!-- CANVA COLLAGE (FIXED SIZE) -->
 <section>
   <div class="card">
-    <h1 style="font-size:6vw">little pieces of you 🤍</h1>
-
-    <div style="position:relative;width:100%;padding-top:125%;">
-      <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
-      src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"></iframe>
+    <div class="canvaWrap">
+      <iframe
+        src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 </section>
 
 
 
-<!-- ================= REELS ================= -->
-
+<!-- REELS -->
 <section style="padding:0">
 
 <div class="reels">
 
   <div class="reel">
     <div class="card">
-      <h1 style="font-size:6vw">For You Reels 💕</h1>
-      <p>Double tap to like ❤️<br>(every like = one kiss 😘)</p>
+      <h1 style="font-size:6vw">For You</h1>
+      <p>Double tap to like</p>
     </div>
   </div>
 
-  <!-- 8 reels -->
   <script>
   for(let i=1;i<=8;i++){
     document.write(`
       <div class="reel" ondblclick="likeEffect(event)">
-        <video src="reel${i}.mp4" autoplay muted loop playsinline></video>
+        <video src="reel${i}.mp4" autoplay muted loop playsinline onclick="toggleSound(this)"></video>
         <button class="likeBtn" onclick="likeEffect(event)">❤️</button>
       </div>
     `);
@@ -270,15 +281,14 @@ for(let i=0;i<60;i++){
 
 
 
-<!-- ================= PROPOSAL ================= -->
-
+<!-- PROPOSAL -->
 <section>
   <div class="card">
-    <h1>Will you be my Valentine? 💖</h1>
+    <h1>Will you be my Valentine?</h1>
 
     <div style="position:relative;margin-top:20px;height:80px;">
       <button class="yes" onclick="boom()">Yes 💙</button>
-      <button class="no" id="noBtn">chal hat bachi sudhar ja 😝</button>
+      <button class="no" id="noBtn">No</button>
     </div>
   </div>
 </section>
@@ -287,9 +297,13 @@ for(let i=0;i<60;i++){
 
 <script>
 
-/* LIKE EFFECT */
-function likeEffect(e){
+/* sound toggle */
+function toggleSound(v){
+  v.muted = !v.muted;
+}
 
+/* like */
+function likeEffect(e){
   let heart=document.createElement("div");
   heart.className="bigHeart";
   heart.innerHTML="❤️";
@@ -297,19 +311,19 @@ function likeEffect(e){
   heart.style.top=(e.clientY-35)+"px";
   document.body.appendChild(heart);
 
-  for(let i=0;i<10;i++){
+  for(let i=0;i<8;i++){
     let k=document.createElement("div");
     k.className="kiss";
     k.innerHTML="💋";
     k.style.left=Math.random()*100+"vw";
-    k.style.bottom="100px";
+    k.style.bottom="120px";
     document.body.appendChild(k);
   }
 }
 
-/* CONFETTI */
+/* confetti */
 function boom(){
-  for(let i=0;i<200;i++){
+  for(let i=0;i<180;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
@@ -319,12 +333,13 @@ function boom(){
   }
 }
 
-/* RUN AWAY BUTTON */
+/* run away + taunt AFTER press */
 const noBtn=document.getElementById("noBtn");
 
 function moveBtn(){
   noBtn.style.top=(Math.random()*120-60)+"px";
   noBtn.style.left=(Math.random()*150-75)+"px";
+  alert("chal hat bachi sudhar ja 😝");
 }
 
 noBtn.addEventListener("touchstart",moveBtn);
