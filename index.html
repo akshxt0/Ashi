@@ -2,24 +2,22 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ashi 🤍</title>
 
 <style>
-/* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:system-ui,-apple-system,sans-serif;
+  font-family:system-ui;
 }
 
 body{
   overflow-x:hidden;
-  color:white;
   background:linear-gradient(#9fd8ff,#6db9ff,#3a98ff);
+  color:white;
 }
 
-/* ================= SECTIONS ================= */
+/* ========= SECTIONS ========= */
 section{
   min-height:100vh;
   display:flex;
@@ -27,74 +25,61 @@ section{
   align-items:center;
   flex-direction:column;
   text-align:center;
-  padding:24px;
+  padding:25px;
   position:relative;
 }
 
-/* ================= STICKERS (GLOBAL BG) ================= */
+/* ========= FLOATING STICKERS ========= */
 .sticker{
   position:fixed;
-  width:120px;
-  opacity:.85;
-  pointer-events:none;
+  width:110px;
   z-index:-1;
-  animation:floaty 7s ease-in-out infinite alternate;
+  opacity:.95;
+  pointer-events:none;
+  animation:float 6s ease-in-out infinite alternate;
 }
 
-@keyframes floaty{
-  from{transform:translateY(0) rotate(-6deg)}
-  to{transform:translateY(-18px) rotate(6deg)}
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-20px)}
 }
 
-/* ================= HERO ================= */
+/* ========= TEXT ========= */
 h1{
-  font-size:8vw;
-  text-shadow:0 6px 20px rgba(0,0,0,.25);
+  font-size:7vw;
+  text-shadow:0 6px 20px rgba(0,0,0,.3);
 }
 
-/* ================= CARD ================= */
-.card{
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(14px);
-  padding:30px;
-  border-radius:28px;
-  box-shadow:0 10px 35px rgba(0,0,0,.15);
-}
-
-/* ================= MAIN VIDEO ================= */
+/* ========= MAIN VIDEO ========= */
 .mainVideo{
-  width:90vw;
+  width:92vw;
   max-width:420px;
-  border-radius:24px;
+  border-radius:22px;
 }
 
 .audioBtn{
   position:absolute;
-  top:15px;
-  right:15px;
+  top:12px;
+  right:12px;
+  background:white;
   border:none;
   border-radius:50%;
   padding:10px 14px;
-  font-size:18px;
-  background:white;
 }
 
-/* ================= REELS ================= */
+/* ========= REELS PERFECT ========= */
 .reels{
   height:100vh;
-  overflow-y:scroll;
+  overflow-y:auto;
   scroll-snap-type:y mandatory;
 }
 
 .reel{
   height:100vh;
-  width:100%;
+  width:100vw;
   scroll-snap-align:start;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:black;
   position:relative;
+  background:black;
 }
 
 .reel video{
@@ -103,18 +88,17 @@ h1{
   object-fit:cover;
 }
 
-/* DP bottom-left */
+/* ========= DP (ONLY REELS) ========= */
 .dp{
   position:fixed;
-  left:14px;
-  bottom:90px;
+  left:16px;
+  bottom:95px;
   width:60px;
   height:60px;
   border-radius:50%;
   border:3px solid white;
-  object-fit:cover;
+  z-index:50;
   display:none;
-  z-index:20;
   animation:floatdp 3s ease-in-out infinite;
 }
 
@@ -123,195 +107,185 @@ h1{
   50%{transform:translateY(-8px)}
 }
 
-/* LIKE */
+/* ========= LIKE ========= */
 .likeBtn{
   position:fixed;
   right:18px;
-  bottom:100px;
-  font-size:32px;
+  bottom:120px;
+  font-size:34px;
   display:none;
-  z-index:20;
-  animation:floatdp 3s infinite;
+  z-index:50;
 }
 
-/* heart pop */
+/* hearts */
 .bigHeart{
   position:fixed;
   font-size:70px;
-  animation:pop .7s forwards;
+  animation:pop .6s forwards;
 }
-
 @keyframes pop{
   0%{transform:scale(0)}
-  50%{transform:scale(1.3)}
   100%{opacity:0}
 }
 
-/* kisses */
 .kiss{
   position:fixed;
-  font-size:20px;
-  animation:rise 1.8s linear forwards;
+  font-size:22px;
+  animation:rise 1.4s forwards;
 }
 @keyframes rise{
-  to{transform:translateY(-150px);opacity:0}
+  to{transform:translateY(-140px);opacity:0}
 }
 
-/* ================= BUTTONS ================= */
-button{
+/* ========= BUTTONS ========= */
+.yes{
+  background:#ff4f87;
   border:none;
+  padding:16px 38px;
   border-radius:40px;
-  padding:16px 36px;
+  color:white;
   font-size:18px;
 }
 
-.yes{background:#ff4f87;color:white}
-
+/* STABLE NO BUTTON */
 .no{
   position:fixed;
-  bottom:80px;
-  right:30px;
+  bottom:60px;
+  right:20px;
+  width:130px;
+  height:48px;
+  border-radius:28px;
+  border:none;
   background:#ff8aa8;
   color:white;
+  z-index:100;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= GLOBAL STICKERS ================= -->
-<img src="ticket1.png" class="sticker" style="top:10%;left:5%">
-<img src="ticket2.png" class="sticker" style="top:25%;right:5%">
-<img src="ticket3.png" class="sticker" style="bottom:25%;left:6%">
-<img src="ticket4.png" class="sticker" style="bottom:15%;right:8%">
-<img src="ticket5.png" class="sticker" style="top:55%;left:40%">
-<img src="unocard.png" class="sticker" style="top:45%;right:35%;width:150px">
+<!-- STICKERS -->
+<img src="ticket1.png" class="sticker" style="top:8%;left:6%">
+<img src="ticket2.png" class="sticker" style="top:40%;right:6%">
+<img src="ticket3.png" class="sticker" style="bottom:30%;left:8%">
+<img src="ticket4.png" class="sticker" style="bottom:18%;right:10%">
+<img src="ticket5.png" class="sticker" style="top:60%;left:40%">
+<img src="unocard.png" class="sticker" style="top:48%;right:35%;width:140px">
 
 <!-- DP + LIKE -->
-<img src="IMG_20260106_133607_522.webp" class="dp" id="dp">
-<div class="likeBtn" id="likeBtn">❤️</div>
+<img src="IMG_20260106_133607_522.webp" id="dp" class="dp">
+<div id="likeBtn" class="likeBtn">❤️</div>
 
-<!-- ================= HERO ================= -->
+<!-- HERO -->
 <section>
-  <h1>Hey Ashi ☁️</h1>
+<h1>Hey Ashi ☁️</h1>
 </section>
 
-<!-- ================= MAIN VIDEO ================= -->
+<!-- MAIN -->
 <section>
-  <div class="card" style="position:relative;">
-    <button class="audioBtn" onclick="toggleAudio()">🔊</button>
-    <video id="mainVid" class="mainVideo" src="main.mp4" autoplay muted loop playsinline></video>
-  </div>
+<button class="audioBtn" onclick="toggleAudio()">🔊</button>
+<video id="mainVid" class="mainVideo" src="main.mp4" autoplay muted loop playsinline></video>
 
-  <h1 style="font-size:6vw;margin-top:20px;">
-    the girl i'd fall in love with<br>in every lifetime
-  </h1>
+<h1 style="margin-top:25px;font-size:6vw">
+the girl i'd fall in love with<br>in every lifetime
+</h1>
 </section>
 
-<!-- ================= REELS ================= -->
-<section class="reels" id="reels">
+<!-- REELS -->
+<section id="reels" class="reels">
 
-  <div class="reel"><video src="reel1.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel2.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel3.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel4.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel5.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel6.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel7.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel8.mp4" playsinline></video></div>
+<div class="reel"><video src="reel1.mp4" playsinline></video></div>
+<div class="reel"><video src="reel2.mp4" playsinline></video></div>
+<div class="reel"><video src="reel3.mp4" playsinline></video></div>
+<div class="reel"><video src="reel4.mp4" playsinline></video></div>
+<div class="reel"><video src="reel5.mp4" playsinline></video></div>
+<div class="reel"><video src="reel6.mp4" playsinline></video></div>
+<div class="reel"><video src="reel7.mp4" playsinline></video></div>
+<div class="reel"><video src="reel8.mp4" playsinline></video></div>
 
 </section>
 
-<!-- ================= VALENTINE ================= -->
+<!-- VALENTINE -->
 <section>
-  <div class="card">
-    <h1>Will you be my Valentine?</h1>
-    <button class="yes" onclick="confetti()">Yes 💖</button>
-  </div>
+<h1>Will you be my Valentine?</h1>
+<button class="yes">Yes 💖</button>
 </section>
 
-<button class="no" id="noBtn">No</button>
+<button id="noBtn" class="no">No</button>
 
 <script>
 
-/* ===== MAIN AUDIO ===== */
+/* AUDIO */
 function toggleAudio(){
-  let v=document.getElementById("mainVid");
-  v.muted=!v.muted;
+ const v=document.getElementById("mainVid");
+ v.muted=!v.muted;
 }
 
-/* ===== REELS AUTO PLAY ===== */
-const videos=document.querySelectorAll(".reel video");
-const reels=document.getElementById("reels");
-const dp=document.getElementById("dp");
-const likeBtn=document.getElementById("likeBtn");
+/* REELS AUTOPLAY */
+const vids=document.querySelectorAll(".reel video");
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.play();
-      e.target.muted=false;
-    }else{
-      e.target.pause();
-      e.target.muted=true;
-    }
-  });
+const obs=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{
+   if(e.isIntersecting){
+     e.target.play();
+     e.target.muted=false;
+   } else e.target.pause();
+ });
 },{threshold:.7});
 
-videos.forEach(v=>observer.observe(v));
+vids.forEach(v=>obs.observe(v));
 
-/* show dp/like only in reels */
+/* SHOW DP + LIKE ONLY WHEN INSIDE REELS */
+const dp=document.getElementById("dp");
+const like=document.getElementById("likeBtn");
+const reels=document.getElementById("reels");
+
 window.addEventListener("scroll",()=>{
-  const rect=reels.getBoundingClientRect();
-  const show=rect.top<window.innerHeight && rect.bottom>0;
-  dp.style.display=show?"block":"none";
-  likeBtn.style.display=show?"block":"none";
+ const r=reels.getBoundingClientRect();
+ const inside=r.top<window.innerHeight && r.bottom>0;
+ dp.style.display=inside?"block":"none";
+ like.style.display=inside?"block":"none";
 });
 
-/* ===== LIKE ===== */
-function likeEffect(x,y){
-  let h=document.createElement("div");
-  h.className="bigHeart";
-  h.innerHTML="❤️";
-  h.style.left=x+"px";
-  h.style.top=y+"px";
-  document.body.appendChild(h);
+/* LIKE */
+like.onclick=e=>{
+ const x=e.clientX,y=e.clientY;
 
-  for(let i=0;i<5;i++){
-    let k=document.createElement("div");
-    k.className="kiss";
-    k.innerHTML="💋";
-    k.style.left=x+Math.random()*40+"px";
-    k.style.top=y+"px";
-    document.body.appendChild(k);
-  }
-}
+ const heart=document.createElement("div");
+ heart.className="bigHeart";
+ heart.innerHTML="❤️";
+ heart.style.left=x+"px";
+ heart.style.top=y+"px";
+ document.body.appendChild(heart);
 
-likeBtn.onclick=(e)=>likeEffect(e.clientX,e.clientY);
+ for(let i=0;i<5;i++){
+  const k=document.createElement("div");
+  k.className="kiss";
+  k.innerHTML="💋";
+  k.style.left=x+Math.random()*40+"px";
+  k.style.top=y+"px";
+  document.body.appendChild(k);
+ }
+};
 
-document.querySelectorAll(".reel").forEach(r=>{
-  r.ondblclick=(e)=>likeEffect(e.clientX,e.clientY);
-});
-
-/* ===== CONFETTI ===== */
-function confetti(){
-  alert("best decision ever 🤍");
-}
-
-/* ===== NO BUTTON ===== */
-let tries=0;
+/* NO BUTTON RUN */
 const noBtn=document.getElementById("noBtn");
+let tries=0;
 
 noBtn.onclick=()=>{
-  if(tries<2){
-    noBtn.style.left=Math.random()*80+"vw";
-    noBtn.style.top=Math.random()*80+"vh";
-    noBtn.style.position="fixed";
-    tries++;
-  }else{
-    noBtn.innerText="chal hat bachi sudhar ja 😭💗";
-  }
-}
+ if(tries<3){
+   const w=window.innerWidth-140;
+   const h=window.innerHeight-100;
+   noBtn.style.left=Math.random()*w+"px";
+   noBtn.style.top=Math.random()*h+"px";
+   noBtn.style.right="auto";
+   noBtn.style.bottom="auto";
+ }else{
+   noBtn.textContent="chal hat bachi sudhar ja ❤️";
+ }
+ tries++;
+};
 </script>
 
 </body>
