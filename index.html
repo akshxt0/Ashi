@@ -6,7 +6,7 @@
 
 <style>
 
-/* ========= BASE ========= */
+/* ================= BASE ================= */
 
 *{
   margin:0;
@@ -21,7 +21,7 @@ body{
   background:linear-gradient(#9fd8ff,#6db9ff,#3a98ff);
 }
 
-/* ========= CLOUDS ========= */
+/* ================= CLOUDS ================= */
 
 .cloud{
   position:fixed;
@@ -40,7 +40,7 @@ body{
   to{transform:translateX(140vw)}
 }
 
-/* ========= SECTION ========= */
+/* ================= SECTIONS ================= */
 
 section{
   min-height:100vh;
@@ -51,38 +51,16 @@ section{
   text-align:center;
 }
 
-/* ========= CARD ========= */
+/* ================= CARDS ================= */
 
 .card{
   background:rgba(255,255,255,.18);
   backdrop-filter:blur(20px);
-  padding:24px;
+  padding:22px;
   border-radius:20px;
 }
 
-/* ========= FLOATING DP ========= */
-
-.pfp{
-  position:fixed;
-  top:18px;
-  left:18px;
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid white;
-  z-index:999;
-}
-
-.pfpHeart{
-  position:fixed;
-  top:12px;
-  left:55px;
-  font-size:18px;
-  z-index:1000;
-}
-
-/* ========= FEATURED VIDEO (main.mp4) ========= */
+/* ================= MAIN VIDEO ================= */
 
 .heroVideo{
   width:92vw;
@@ -92,7 +70,7 @@ section{
   object-fit:cover;
 }
 
-/* ========= CANVA ========= */
+/* ================= CANVA ================= */
 
 .canvaWrap{
   width:92vw;
@@ -102,7 +80,12 @@ section{
   overflow:hidden;
 }
 
-/* ========= REELS ========= */
+/* ================= REELS ================= */
+
+.reelsSection{
+  position:relative;
+  padding:0;
+}
 
 .reels{
   height:100vh;
@@ -120,42 +103,45 @@ section{
   position:relative;
 }
 
-/* proper reel ratio */
 .reel video{
   height:100vh;
   aspect-ratio:9/16;
   object-fit:cover;
 }
 
-/* floating like */
-.likeBtn{
-  position:absolute;
-  right:18px;
-  bottom:100px;
-  font-size:26px;
-  background:white;
+/* ================= FLOATING DP (REELS ONLY) ================= */
+
+.reelPfp{
+  position:fixed;
+  top:18px;
+  left:18px;
+  width:55px;
+  height:55px;
   border-radius:50%;
-  padding:10px 14px;
-  animation:floatBtn 2s ease-in-out infinite alternate;
+  object-fit:cover;
+  border:3px solid white;
+  z-index:1000;
+  display:none;
+  animation:pfpFloat 3s ease-in-out infinite alternate;
 }
 
-@keyframes floatBtn{
+/* gentle floating animation */
+@keyframes pfpFloat{
   from{transform:translateY(0)}
   to{transform:translateY(-8px)}
 }
 
-/* sound button */
-.soundBtn{
-  position:absolute;
-  right:18px;
-  bottom:160px;
-  background:rgba(0,0,0,.5);
-  color:white;
-  border-radius:50%;
-  padding:8px 10px;
+.reelHeart{
+  position:fixed;
+  top:12px;
+  left:55px;
+  font-size:18px;
+  z-index:1001;
+  display:none;
+  animation:pfpFloat 3s ease-in-out infinite alternate;
 }
 
-/* ========= HEART POP ========= */
+/* ================= HEART POP ================= */
 
 .bigHeart{
   position:fixed;
@@ -169,18 +155,7 @@ section{
   100%{opacity:0}
 }
 
-/* ========= CONFETTI ========= */
-
-.confetti{
-  position:fixed;
-  width:8px;
-  height:8px;
-  animation:fall 3s linear forwards;
-}
-
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg)}
-}
+/* ================= BUTTONS ================= */
 
 button{
   padding:12px 22px;
@@ -196,11 +171,9 @@ button{
 
 <body>
 
-<img src="IMG_20260106_133607_522.webp" class="pfp">
-<div class="pfpHeart">❤️</div>
-
+<!-- clouds -->
 <div class="cloud" style="top:10%"></div>
-<div class="cloud" style="top:45%"></div>
+<div class="cloud" style="top:40%"></div>
 <div class="cloud" style="top:70%"></div>
 
 
@@ -215,7 +188,7 @@ button{
 
 
 
-<!-- MAIN VIDEO BACK -->
+<!-- MAIN VIDEO (main.mp4 back) -->
 <section>
   <video class="heroVideo" src="main.mp4" autoplay muted loop playsinline></video>
 </section>
@@ -225,22 +198,28 @@ button{
 <!-- CANVA -->
 <section>
   <div class="canvaWrap">
-    <iframe src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"
-      style="width:100%;height:100%;border:none;"></iframe>
+    <iframe
+      src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"
+      style="width:100%;height:100%;border:none;">
+    </iframe>
   </div>
 </section>
 
 
 
-<!-- REELS -->
-<section style="padding:0">
+<!-- ================= REELS ================= -->
 
-<div class="reels">
+<section class="reelsSection">
+
+<!-- floating dp only here -->
+<img src="IMG_20260106_133607_522.webp" class="reelPfp" id="pfp">
+<div class="reelHeart" id="pfpHeart">❤️</div>
+
+<div class="reels" id="reels">
 
   <div class="reel">
     <div class="card">
-      <h2>For You ❤️</h2>
-      <p>Double tap to like • tap 🔊 for sound</p>
+      <p>just scroll ❤️</p>
     </div>
   </div>
 
@@ -248,9 +227,7 @@ button{
   for(let i=1;i<=8;i++){
     document.write(`
       <div class="reel">
-        <video id="v${i}" src="reel${i}.mp4" autoplay muted loop playsinline></video>
-        <button class="soundBtn" onclick="toggleSound(v${i}, this)">🔇</button>
-        <button class="likeBtn" ondblclick="likeEffect(event)">❤️</button>
+        <video src="reel${i}.mp4" playsinline loop></video>
       </div>
     `);
   }
@@ -266,7 +243,7 @@ button{
 <section>
   <div class="card">
     <h2>Will you be my Valentine?</h2>
-    <button class="yes" onclick="boom()">Yes 💙</button>
+    <button class="yes">Yes 💙</button>
     <button class="no" id="noBtn">No</button>
   </div>
 </section>
@@ -275,34 +252,55 @@ button{
 
 <script>
 
-/* toggle sound + stop others */
-function toggleSound(v, btn){
-  document.querySelectorAll("video").forEach(x=>x.muted=true);
-  v.muted=false;
-  btn.innerHTML="🔊";
-}
+/* ================= REAL REELS BEHAVIOUR ================= */
 
-/* heart pop */
-function likeEffect(e){
-  let h=document.createElement("div");
-  h.className="bigHeart";
-  h.innerHTML="❤️";
-  h.style.left=e.clientX+"px";
-  h.style.top=e.clientY+"px";
-  document.body.appendChild(h);
-}
+const videos=document.querySelectorAll(".reel video");
 
-/* confetti */
-function boom(){
-  for(let i=0;i<150;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    document.body.appendChild(c);
-  }
-}
+/* auto play only visible reel */
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const v=entry.target;
 
-/* run away + change text */
+    if(entry.isIntersecting){
+      videos.forEach(x=>{
+        x.pause();
+        x.muted=true;
+      });
+
+      v.muted=false;
+      v.play();
+    }
+  });
+},{threshold:.7});
+
+videos.forEach(v=>observer.observe(v));
+
+
+
+/* ================= SHOW DP ONLY ON REELS ================= */
+
+const reels=document.getElementById("reels");
+const pfp=document.getElementById("pfp");
+const heart=document.getElementById("pfpHeart");
+
+const reelObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      pfp.style.display="block";
+      heart.style.display="block";
+    }else{
+      pfp.style.display="none";
+      heart.style.display="none";
+    }
+  });
+},{threshold:.2});
+
+reelObserver.observe(reels);
+
+
+
+/* ================= NO BUTTON ================= */
+
 const noBtn=document.getElementById("noBtn");
 
 function moveBtn(){
