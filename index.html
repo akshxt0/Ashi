@@ -3,6 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>For Ashi 🤍</title>
+
 <style>
 *{
   margin:0;
@@ -17,15 +19,15 @@ body{
   overflow-x:hidden;
 }
 
-/* ============ SECTIONS ============ */
+/* ================= SECTIONS ================= */
 section{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:25px;
   text-align:center;
+  padding:25px;
   position:relative;
 }
 
@@ -39,40 +41,48 @@ section::after{
   background:rgba(255,255,255,.2);
 }
 
-/* ============ STICKERS BG ============ */
+/* ================= FLOATING STICKERS ================= */
 .sticker{
   position:fixed;
   width:110px;
   opacity:.9;
-  animation:float 6s ease-in-out infinite;
   pointer-events:none;
+  z-index:-1;
+  animation:float 6s ease-in-out infinite alternate;
 }
 
 @keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
+  from{transform:translateY(0)}
+  to{transform:translateY(-20px)}
 }
 
-/* ============ MAIN VIDEO ============ */
+/* ================= TEXT ================= */
+h1{
+  font-size:8vw;
+  text-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+/* ================= MAIN VIDEO ================= */
 .mainVideo{
-  width:95%;
+  width:90%;
+  max-width:420px;
   border-radius:22px;
+  box-shadow:0 12px 35px rgba(0,0,0,.25);
 }
 
-.audioBtn{
-  margin-top:10px;
-  background:white;
-  color:black;
-  padding:8px 14px;
-  border-radius:20px;
-  border:none;
+/* ================= REELS ================= */
+#reels{
+  height:100vh;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
 }
 
-/* ============ REELS ============ */
 .reel{
   height:100vh;
   width:100%;
+  scroll-snap-align:start;
   position:relative;
+  background:black;
 }
 
 .reel video{
@@ -81,36 +91,31 @@ section::after{
   object-fit:cover;
 }
 
-/* like button */
+/* overlays */
+.dp{
+  position:fixed;
+  left:16px;
+  bottom:95px;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:3px solid white;
+  display:none;
+  z-index:10;
+}
+
 .likeBtn{
-  position:absolute;
+  position:fixed;
   right:18px;
   bottom:110px;
   font-size:32px;
   background:none;
   border:none;
   color:white;
-}
-
-/* your dp floating */
-.dp{
-  position:absolute;
-  left:18px;
-  bottom:110px;
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  border:3px solid white;
-  animation:float 5s infinite;
+  display:none;
 }
 
 /* kisses */
-.kiss{
-  position:absolute;
-  font-size:24px;
-  animation:kissUp 1s forwards;
-}
-
 @keyframes kissUp{
   to{
     transform:translateY(-120px);
@@ -118,117 +123,205 @@ section::after{
   }
 }
 
-/* ============ BUTTONS ============ */
-.yes{
-  background:#ff4f8b;
-  padding:14px 30px;
-  border:none;
-  border-radius:30px;
-  color:white;
-  font-size:18px;
+/* ================= PROPOSAL ================= */
+.proposalCard{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  padding:35px 30px;
+  border-radius:28px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
-.no{
-  background:#ff7c9c;
-  padding:14px 25px;
+.yesBtn{
+  background:#ff4f87;
   border:none;
-  border-radius:30px;
   color:white;
-  position:absolute;
+  padding:14px 32px;
+  border-radius:30px;
+  font-size:17px;
+}
+
+.noBtn{
+  background:#ff8aa8;
+  border:none;
+  color:white;
+  padding:14px 28px;
+  border-radius:30px;
+  font-size:15px;
+  position:relative;
 }
 </style>
 </head>
+
 <body>
 
-<!-- floating stickers -->
-<img src="ticket1.png" class="sticker" style="top:10%;left:10%">
-<img src="ticket2.png" class="sticker" style="top:20%;right:10%">
-<img src="ticket3.png" class="sticker" style="bottom:15%;left:5%">
-<img src="ticket4.png" class="sticker" style="bottom:25%;right:8%">
-<img src="ticket5.png" class="sticker" style="top:45%;left:35%">
-<img src="unocard.png" class="sticker" style="top:60%;right:35%">
+<!-- ================= STICKERS ================= -->
+<img src="ticket1.png" class="sticker" style="top:10%;left:6%">
+<img src="ticket2.png" class="sticker" style="top:35%;right:6%">
+<img src="ticket3.png" class="sticker" style="bottom:30%;left:8%">
+<img src="ticket4.png" class="sticker" style="bottom:18%;right:10%">
+<img src="ticket5.png" class="sticker" style="top:60%;left:40%">
+<img src="unocard.png" class="sticker" style="top:48%;right:35%;width:140px">
 
-<!-- ============ MAIN VIDEO ============ -->
+<!-- ================= LANDING ================= -->
 <section>
-  <h2>to the girl i want to fall in love with in every lifetime ❤️</h2>
-
-  <video id="mainVid" class="mainVideo" src="main.mp4"></video>
-  <button class="audioBtn" onclick="toggleAudio()">Audio 🔊</button>
+  <h1>Hey Ashi ☁️</h1>
 </section>
 
-<!-- ============ REELS ============ -->
-<section class="reel">
-  <video src="reel1.mp4" onclick="togglePlay(this)"></video>
-  <button class="likeBtn" onclick="like(this)">❤️</button>
-  <img src="IMG_20260106_133607_522.webp" class="dp">
+
+<!-- ================= MAIN VIDEO ================= -->
+<section id="mainSection">
+
+  <h2 style="font-size:6vw;margin-bottom:22px;">
+    the girl i'd fall in love with<br>in every lifetime
+  </h2>
+
+  <video
+    id="mainVid"
+    class="mainVideo"
+    src="main.mp4"
+    autoplay
+    playsinline>
+  </video>
+
 </section>
 
-<section class="reel">
-  <video src="reel2.mp4" onclick="togglePlay(this)"></video>
-  <button class="likeBtn" onclick="like(this)">❤️</button>
-  <img src="IMG_20260106_133607_522.webp" class="dp">
+
+<!-- ================= REELS ================= -->
+<section id="reels">
+
+  <div class="reel"><video src="reel1.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel2.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel3.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel4.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel5.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel6.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel7.mp4" playsinline></video></div>
+  <div class="reel"><video src="reel8.mp4" playsinline></video></div>
+
+  <img src="IMG_20260106_133607_522.webp" id="dp" class="dp">
+  <button id="likeBtn" class="likeBtn">❤️</button>
+
 </section>
 
-<section class="reel">
-  <video src="reel3.mp4" onclick="togglePlay(this)"></video>
-  <button class="likeBtn" onclick="like(this)">❤️</button>
-  <img src="IMG_20260106_133607_522.webp" class="dp">
+
+<!-- ================= PROPOSAL ================= -->
+<section id="proposal">
+
+  <div class="proposalCard">
+
+    <h1 style="margin-bottom:25px;">
+      Will you be my Valentine?
+    </h1>
+
+    <div style="display:flex;gap:18px;justify-content:center;">
+      <button class="yesBtn" onclick="showConfetti()">Yes 💖</button>
+      <button class="noBtn" id="noBtn">No</button>
+    </div>
+
+  </div>
+
 </section>
 
-<!-- add more same way -->
-
-<!-- ============ PROPOSAL ============ -->
-<section>
-  <h2>Will you be my Valentine?</h2>
-  <button class="yes" onclick="confetti()">Yes ✨</button>
-  <button class="no" id="noBtn">No</button>
-</section>
 
 <script>
-function toggleAudio(){
-  let v=document.getElementById("mainVid");
-  v.muted=!v.muted;
-}
 
-function togglePlay(v){
-  v.paused ? v.play() : v.pause();
-}
+/* ========= MAIN VIDEO STOP WHEN LEAVING ========= */
+const mainVid=document.getElementById("mainVid");
 
-function like(btn){
-  let parent=btn.parentElement;
+const mainObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) mainVid.play();
+    else mainVid.pause();
+  });
+},{threshold:.6});
 
+mainObserver.observe(mainVid);
+
+
+/* ========= REELS ========= */
+const reels=document.getElementById("reels");
+const vids=reels.querySelectorAll("video");
+const dp=document.getElementById("dp");
+const likeBtn=document.getElementById("likeBtn");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      vids.forEach(v=>v.pause());
+      e.target.play();
+    }
+  });
+},{threshold:.7});
+
+vids.forEach(v=>{
+  observer.observe(v);
+
+  v.onclick=()=>v.paused?v.play():v.pause();
+  v.ondblclick=e=>likeEffect(e.clientX,e.clientY);
+});
+
+window.addEventListener("scroll",()=>{
+  const r=reels.getBoundingClientRect();
+  const show=r.top<window.innerHeight && r.bottom>0;
+
+  dp.style.display=show?"block":"none";
+  likeBtn.style.display=show?"block":"none";
+});
+
+likeBtn.onclick=e=>likeEffect(e.clientX,e.clientY);
+
+function likeEffect(x,y){
   for(let i=0;i<6;i++){
-    let k=document.createElement("div");
+    const k=document.createElement("div");
     k.innerText="💋";
-    k.className="kiss";
-    k.style.left=Math.random()*80+"%";
-    k.style.bottom="80px";
-    parent.appendChild(k);
+    k.style.position="fixed";
+    k.style.left=x+"px";
+    k.style.top=y+"px";
+    k.style.animation="kissUp 1s forwards";
+    document.body.appendChild(k);
     setTimeout(()=>k.remove(),1000);
   }
 }
 
-function confetti(){
-  for(let i=0;i<50;i++){
-    let c=document.createElement("div");
+
+/* ========= CONFETTI ========= */
+function showConfetti(){
+  for(let i=0;i<80;i++){
+    const c=document.createElement("div");
     c.style.position="fixed";
     c.style.width="6px";
     c.style.height="6px";
-    c.style.background="white";
+    c.style.background=["#fff","#ffd1dc","#ff9ecb"][Math.floor(Math.random()*3)];
     c.style.left=Math.random()*100+"vw";
     c.style.top="-10px";
-    c.style.animation="kissUp 2s forwards";
+    c.style.animation="fall 2.2s linear forwards";
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),2000);
+    setTimeout(()=>c.remove(),2200);
   }
 }
 
-/* no button run */
-let no=document.getElementById("noBtn");
-no.onmouseover=()=>{
-  no.style.left=Math.random()*80+"%";
-  no.style.top=Math.random()*80+"%";
+const style=document.createElement('style');
+style.innerHTML=`
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
+}`;
+document.head.appendChild(style);
+
+
+/* ========= NO BUTTON ========= */
+const noBtn=document.getElementById("noBtn");
+let tries=0;
+
+noBtn.onmouseover=()=>{
+  if(tries<3){
+    noBtn.style.transform="translate("+(Math.random()*120-60)+"px,"+(Math.random()*80-40)+"px)";
+  }else{
+    noBtn.innerText="chal hat bachi sudhar ja 😭💗";
+  }
+  tries++;
 };
+
 </script>
 
 </body>
