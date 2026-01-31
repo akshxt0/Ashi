@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For Ashi ☁️</title>
 
 <style>
+
+/* ================= GLOBAL ================= */
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:-apple-system,system-ui,sans-serif;
+  font-family:system-ui,-apple-system,sans-serif;
 }
 
 body{
   overflow-x:hidden;
   color:white;
-  background:linear-gradient(180deg,#eaf8ff,#bfe6ff,#79c5ff);
+  background:linear-gradient(#9fd8ff,#6db9ff,#3a98ff);
 }
 
 /* ================= CLOUDS ================= */
 
 .cloud{
-  position:absolute;
-  width:450px;
-  height:220px;
+  position:fixed;
+  width:380px;
+  height:200px;
   background:white;
   border-radius:50%;
-  filter:blur(70px);
+  filter:blur(60px);
   opacity:.35;
-  animation:float 80s linear infinite;
-  pointer-events:none;
+  animation:float 60s linear infinite;
+  z-index:-2;
 }
 
 @keyframes float{
@@ -41,16 +43,16 @@ body{
 /* ================= SPARKLES ================= */
 
 .sparkle{
-  position:absolute;
+  position:fixed;
   width:3px;
   height:3px;
   background:white;
   border-radius:50%;
-  animation:twinkle 2s infinite alternate;
-  pointer-events:none;
+  animation:blink 2s infinite alternate;
+  z-index:-1;
 }
 
-@keyframes twinkle{
+@keyframes blink{
   from{opacity:.3}
   to{opacity:1}
 }
@@ -60,25 +62,27 @@ body{
 section{
   min-height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
   padding:8vw;
-
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.2s ease;
+  text-align:center;
 }
 
-.show{
-  opacity:1;
-  transform:translateY(0);
+/* ================= GLASS CARD ================= */
+
+.card{
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(20px);
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 8px 40px rgba(0,0,0,.25);
 }
+
+/* ================= TEXT ================= */
 
 h1{
   font-size:8vw;
-  text-shadow:0 0 25px rgba(255,255,255,.8);
+  text-shadow:0 5px 25px rgba(0,0,0,.35);
 }
 
 p{
@@ -86,99 +90,103 @@ p{
   margin-top:10px;
 }
 
-/* ================= MUSIC PLAYER ================= */
-
-.musicWrap{
-  width:90vw;
-  max-width:420px;
-  margin-top:20px;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,.15);
-}
-
-.musicWrap iframe{
-  width:100%;
-  height:100px;
-  border:none;
-}
-
-/* ================= MAIN VIDEO ================= */
-
-.herovid{
-  width:85vw;
-  max-width:450px;
-  border-radius:26px;
-  margin-top:25px;
-  box-shadow:0 25px 60px rgba(0,0,0,.25);
-}
-
-/* ================= CANVA VIDEO ================= */
-
-.canvaWrap{
-  width:92vw;
-  max-width:480px;
-  aspect-ratio:9/16;
-  margin-top:25px;
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 25px 60px rgba(0,0,0,.25);
-}
-
-.canvaWrap iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-/* ================= LOVE LETTER ================= */
-
-.letter{
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(12px);
-  border-radius:25px;
-  padding:25px;
-  width:90vw;
-  max-width:500px;
-  line-height:1.6;
-  font-size:18px;
-}
-
-/* ================= BUTTON ================= */
+/* ================= BUTTONS ================= */
 
 button{
-  padding:14px 28px;
+  padding:12px 22px;
   border:none;
   border-radius:30px;
-  font-size:18px;
-  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.yes{ background:white; color:#3a98ff; }
+.no{ background:#ff8fa3; color:white; position:absolute; }
+
+/* ================= REELS ================= */
+
+.reels{
+  height:100vh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+
+.reel{
+  height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+.reel video{
+  height:85vh;
+  border-radius:25px;
+}
+
+.likeBtn{
+  position:absolute;
+  right:20px;
+  bottom:90px;
+  font-size:28px;
   background:white;
-  color:#4aa3ff;
-  margin-top:25px;
-  transition:.15s;
+  border-radius:50%;
+  padding:10px 14px;
 }
 
-button:active{
-  transform:scale(.95);
-}
+/* ================= HEART + KISS ================= */
 
-/* ================= HEARTS ================= */
-
-.heart{
+.bigHeart{
   position:fixed;
-  font-size:18px;
+  font-size:70px;
+  animation:pop 0.8s ease forwards;
+  pointer-events:none;
+}
+
+@keyframes pop{
+  0%{transform:scale(0);opacity:0}
+  40%{transform:scale(1.3);opacity:1}
+  100%{opacity:0}
+}
+
+.kiss{
+  position:fixed;
+  font-size:24px;
   animation:rise 2s linear forwards;
 }
 
 @keyframes rise{
-  to{
-    transform:translateY(-120vh);
-    opacity:0;
-  }
+  to{transform:translateY(-150px);opacity:0}
+}
+
+/* ================= CONFETTI ================= */
+
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* ================= IFRAME ================= */
+
+iframe{
+  border-radius:20px;
+  margin-top:20px;
+  width:90vw;
+  max-width:500px;
 }
 
 </style>
 </head>
+
+
 
 <body>
 
@@ -187,98 +195,140 @@ button:active{
 <div class="cloud" style="top:45%"></div>
 <div class="cloud" style="top:75%"></div>
 
-
-<!-- HERO + SOUND -->
-<section>
-  <h1>Hey Ashi ☁️</h1>
-  <p>play this while scrolling 💙</p>
-
-  <div class="musicWrap">
-    <iframe
-      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1594326735&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
-      allow="autoplay">
-    </iframe>
-  </div>
-</section>
-
-
-<!-- OPTIONAL MAIN VIDEO -->
-<section>
-  <h1 style="font-size:6vw">
-    the girl i'd fall in love with<br>
-    in every lifetime ✨
-  </h1>
-
-  <video class="herovid" autoplay muted loop playsinline>
-    <source src="main.mp4">
-  </video>
-</section>
-
-
-<!-- CANVA COLLAGE VIDEO -->
-<section>
-  <h1 style="font-size:6vw">little pieces of you 🤍</h1>
-
-  <div class="canvaWrap">
-    <iframe
-      src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"
-      allowfullscreen loading="lazy">
-    </iframe>
-  </div>
-</section>
-
-
-<!-- LOVE LETTER -->
-<section>
-  <div class="letter">
-    I don’t just like you.<br><br>
-    I choose you.<br>
-    In every life, every city, every timeline…<br>
-    I’d still find you and fall for you again. ☁️
-  </div>
-</section>
-
-
-<!-- PROPOSAL -->
-<section>
-  <h1>Will you be my Valentine?</h1>
-  <button onclick="hearts()">Yes 💙</button>
-</section>
-
-
 <script>
-
 /* sparkles */
-for(let i=0;i<40;i++){
+for(let i=0;i<60;i++){
   let s=document.createElement("div");
   s.className="sparkle";
   s.style.left=Math.random()*100+"vw";
   s.style.top=Math.random()*100+"vh";
   document.body.appendChild(s);
 }
+</script>
 
-/* fade on scroll */
-const sections=document.querySelectorAll("section");
 
-window.addEventListener("scroll",()=>{
-  sections.forEach(sec=>{
-    if(sec.getBoundingClientRect().top < window.innerHeight-80){
-      sec.classList.add("show");
-    }
-  });
-});
 
-/* heart burst */
-function hearts(){
-  for(let i=0;i<80;i++){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💙";
-    h.style.left=Math.random()*100+"vw";
-    h.style.bottom="0px";
-    document.body.appendChild(h);
+<!-- ================= HERO + MUSIC ================= -->
+
+<section>
+  <div class="card">
+    <h1>Hey Ashi ☁️</h1>
+    <p>play this while scrolling 💙</p>
+
+    <!-- SoundCloud -->
+    <iframe height="120" scrolling="no" frameborder="no" allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1594326735&hide_related=true&show_comments=false&show_user=false&show_reposts=false">
+    </iframe>
+  </div>
+</section>
+
+
+
+<!-- ================= CANVA COLLAGE ================= -->
+
+<section>
+  <div class="card">
+    <h1 style="font-size:6vw">little pieces of you 🤍</h1>
+
+    <div style="position:relative;width:100%;padding-top:125%;">
+      <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
+      src="https://www.canva.com/design/DAHAA2cTrUo/Ze57DYBR5b6BHk0guKLoQQ/watch?embed"></iframe>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ================= REELS ================= -->
+
+<section style="padding:0">
+
+<div class="reels">
+
+  <div class="reel">
+    <div class="card">
+      <h1 style="font-size:6vw">For You Reels 💕</h1>
+      <p>Double tap to like ❤️<br>(every like = one kiss 😘)</p>
+    </div>
+  </div>
+
+  <!-- 8 reels -->
+  <script>
+  for(let i=1;i<=8;i++){
+    document.write(`
+      <div class="reel" ondblclick="likeEffect(event)">
+        <video src="reel${i}.mp4" autoplay muted loop playsinline></video>
+        <button class="likeBtn" onclick="likeEffect(event)">❤️</button>
+      </div>
+    `);
+  }
+  </script>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= PROPOSAL ================= -->
+
+<section>
+  <div class="card">
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div style="position:relative;margin-top:20px;height:80px;">
+      <button class="yes" onclick="boom()">Yes 💙</button>
+      <button class="no" id="noBtn">chal hat bachi sudhar ja 😝</button>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+
+/* LIKE EFFECT */
+function likeEffect(e){
+
+  let heart=document.createElement("div");
+  heart.className="bigHeart";
+  heart.innerHTML="❤️";
+  heart.style.left=(e.clientX-35)+"px";
+  heart.style.top=(e.clientY-35)+"px";
+  document.body.appendChild(heart);
+
+  for(let i=0;i<10;i++){
+    let k=document.createElement("div");
+    k.className="kiss";
+    k.innerHTML="💋";
+    k.style.left=Math.random()*100+"vw";
+    k.style.bottom="100px";
+    document.body.appendChild(k);
   }
 }
+
+/* CONFETTI */
+function boom(){
+  for(let i=0;i<200;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="-10px";
+    c.style.background=["#fff","#ff8fa3","#b3e0ff"][Math.floor(Math.random()*3)];
+    document.body.appendChild(c);
+  }
+}
+
+/* RUN AWAY BUTTON */
+const noBtn=document.getElementById("noBtn");
+
+function moveBtn(){
+  noBtn.style.top=(Math.random()*120-60)+"px";
+  noBtn.style.left=(Math.random()*150-75)+"px";
+}
+
+noBtn.addEventListener("touchstart",moveBtn);
+noBtn.addEventListener("mouseover",moveBtn);
 
 </script>
 
