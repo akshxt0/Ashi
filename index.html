@@ -187,22 +187,97 @@ h1{
 </section>
 
 
-<!-- ================= REELS ================= -->
-<section id="reels">
+<!-- ================= REELS SECTION ================= -->
 
-  <div class="reel"><video src="reel1.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel2.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel3.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel4.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel5.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel6.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel7.mp4" playsinline></video></div>
-  <div class="reel"><video src="reel8.mp4" playsinline></video></div>
+<section id="reels" class="reels-container">
 
-  <img src="IMG_20260106_133607_522.webp" id="dp" class="dp">
-  <button id="likeBtn" class="likeBtn">❤️</button>
+  <div class="reel"><video src="reel1.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel2.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel3.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel4.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel5.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel6.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel7.mp4" playsinline preload="auto"></video></div>
+  <div class="reel"><video src="reel8.mp4" playsinline preload="auto"></video></div>
+
+  <!-- floating dp -->
+  <img src="pfp.jpg" class="reel-dp">
+
+  <!-- like button -->
+  <button class="like-btn">❤️</button>
 
 </section>
+
+<style>
+.reels-container{
+  height:100vh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+}
+
+.reel{
+  height:100vh;
+  width:100%;
+  scroll-snap-align:start;
+  background:black;
+}
+
+.reel video{
+  height:100%;
+  width:100%;
+  object-fit:cover;
+}
+
+.reel-dp{
+  position:fixed;
+  left:18px;
+  bottom:30%;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:3px solid white;
+  animation:float 3s ease-in-out infinite;
+  z-index:5;
+}
+
+.like-btn{
+  position:fixed;
+  right:18px;
+  bottom:32%;
+  font-size:28px;
+  background:none;
+  border:none;
+  z-index:5;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+</style>
+
+<script>
+const videos = document.querySelectorAll(".reel video");
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const video = entry.target;
+
+    if(entry.isIntersecting){
+      video.play();
+      video.muted = false;
+    }else{
+      video.pause();
+      video.currentTime = 0;
+    }
+  });
+},{ threshold:0.7 });
+
+videos.forEach(v=>observer.observe(v));
+</script>
+
+<!-- ================= END REELS ================= -->
 
 
 <!-- ================= PROPOSAL ================= -->
